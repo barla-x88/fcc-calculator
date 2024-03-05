@@ -94,3 +94,9 @@ button {
 .div18 {
   grid-area: 5 / 4 / 7 / 5;
 }
+
+#display {
+  padding: 10px;
+  font-size: 18px;
+  font-family: monospace;
+}
