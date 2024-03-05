@@ -19,7 +19,6 @@ body {
 }
 
 div[class^='div'] {
-  background-color: orange;
   border: 1px solid grey;
 }
 
@@ -96,7 +95,8 @@ button {
 }
 
 #display {
-  padding: 10px;
-  font-size: 18px;
+  padding: 15px;
+  font-size: 20px;
+  background-color: azure;
   font-family: monospace;
 }
