@@ -50,7 +50,7 @@ $(document).ready(function () {
     //handle mathematical opeartions
     if (input === '+' || input === '-' || input === 'X' || input === '/') {
       if (
-        currentNo !== '' &&
+        (currentNo !== '' || expr !== '') &&
         (input === '+' || input === 'X' || input === '/')
       ) {
         expr = expr.concat(currentNo);
@@ -79,6 +79,7 @@ $(document).ready(function () {
       expr = expr.concat(currentNo).replace('X', '*');
       expr = String(eval(expr));
       currentNo = '';
+      operator = '';
       updateDisplay();
     }
   });
