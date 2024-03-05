@@ -67,6 +67,13 @@ $(document).ready(function () {
         updateDisplay();
       }
 
+      if (expr.endsWith('-') && input === '+') {
+        expr = expr.concat(currentNo).slice(0, expr.length - 1);
+        currentNo = '';
+        operator = input;
+        updateDisplay();
+      }
+
       if (currentNo === '' && input === '-' && operator !== '-') {
         currentNo = currentNo.concat(input);
         updateDisplay();
