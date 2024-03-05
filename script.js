@@ -5,8 +5,9 @@ $(document).ready(function () {
   var display = $('#display');
 
   function updateDisplay() {
-    display.text(expr + operator + currentNo.replace('-', ''));
-    console.log(expr);
+    display.text(expr + operator + currentNo);
+    console.log('current  No', currentNo);
+    console.log('expr', expr);
   }
 
   $('button').on('click', function () {
@@ -32,7 +33,7 @@ $(document).ready(function () {
       }
 
       if (input === '.' && !currentNo.includes('.')) {
-        if (currentNo.length === 0) currentNo.concat('0');
+        if (currentNo.length === 0) currentNo = currentNo.concat('0');
         currentNo = currentNo.concat(input);
         updateDisplay();
       }
@@ -48,22 +49,36 @@ $(document).ready(function () {
 
     //handle mathematical opeartions
     if (input === '+' || input === '-' || input === 'X' || input === '/') {
-      if (currentNo) {
-        //replace multiplication sign
-        if (input === 'X') input = '*';
+      if (
+        currentNo !== '' &&
+        (input === '+' || input === 'X' || input === '/')
+      ) {
+        expr = expr.concat(currentNo);
+
+        currentNo = '';
         operator = input;
+        updateDisplay();
+      }
+
+      if (currentNo !== '' && input === '-') {
         expr = expr.concat(currentNo);
         currentNo = '';
-      }
-
-      if (!currentNo && input === '-') {
-        currentNo = currentNo.concat(input);
-      }
-
-      if (expr && currentNo) {
         operator = input;
+        updateDisplay();
       }
 
+      if (currentNo === '' && input === '-' && operator !== '-') {
+        currentNo = currentNo.concat(input);
+        updateDisplay();
+      }
+    }
+
+    //handle equal button
+
+    if (input === '=') {
+      expr = expr.concat(currentNo).replace('X', '*');
+      expr = String(eval(expr));
+      currentNo = '';
       updateDisplay();
     }
   });
